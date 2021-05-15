@@ -6,9 +6,9 @@ class searchBar extends Component {
     this.state = {
       message: "",
       valueName: "",
-      password1: "",
-      password2: "",
       email: "",
+      good: false,
+      user: null,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,41 +17,35 @@ class searchBar extends Component {
   render() {
     return (
       <React.Fragment>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            value={this.state.value}
-            placeholder="name"
-            onChange={(event) =>
-              this.setState({ valueName: event.target.value })
-            }
-          />
-          <input
-            type="text"
-            placeholder="email"
-            value={this.state.value}
-            onChange={(event) => this.setState({ email: event.target.value })}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            value={this.state.password}
-            onChange={(event) =>
-              this.setState({ password1: event.target.value })
-            }
-          />
-          <input
-            type="password"
-            placeholder="password wiederholen"
-            value={this.state.password2}
-            onChange={(event) =>
-              this.setState({ password2: event.target.value })
-            }
-          />
-          <button action="submit" value="a">
-            Submit
-          </button>
-        </form>
+        {!this.state.good ? (
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              value={this.state.value}
+              placeholder="name"
+              onChange={(event) =>
+                this.setState({ valueName: event.target.value })
+              }
+            />
+            <input
+              type="text"
+              placeholder="token"
+              value={this.state.value}
+              onChange={(event) => this.setState({ token: event.target.value })}
+            />
+            <button action="submit" value="a">
+              Submit
+            </button>
+          </form>
+        ) : (
+          <div>
+            <h1>{this.state.user.name}</h1>
+            <p>
+              Das ist dein Password: <br></br>
+            </p>
+            <h2>{this.state.user.password}</h2>
+          </div>
+        )}
         <h1>{this.state.message}</h1>
       </React.Fragment>
     );
@@ -68,8 +62,8 @@ class searchBar extends Component {
 
     var raw = JSON.stringify({
       name: this.state.valueName,
-      password: this.state.password1,
-      email: this.state.email,
+
+      token: this.state.token,
     });
 
     var requestOptions = {
@@ -80,11 +74,16 @@ class searchBar extends Component {
     };
 
     fetch("/api/users", requestOptions)
-      .then((response) => response.text())
-      .then((result) =>
-        this.setState({ message: "Du hast dich erfolgreich registriert" })
-      )
-      .catch((error) => console.log("error", error));
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.error) return this.setState({ message: result.error });
+
+        result.user.password = result.pwd;
+        this.setState({ good: true, user: result.user, message: "" });
+      })
+      .catch((error) =>
+        this.setState({ message: "Da ist was schiefgelaufen " })
+      );
   }
 }
 

@@ -9,6 +9,7 @@ import Gar from "./getallrooms";
 import Room from "./roomtemplate";
 import Navbar from "./navbar";
 import AdminPannel from "./adminpannel";
+import Datenschutz from "./datenschutz";
 
 class maine extends Component {
   render() {
@@ -37,6 +38,9 @@ class maine extends Component {
               </Route>
               <Route exect path="/user/admin">
                 <AdminPannel />
+              </Route>
+              <Route exact path="/datenschutz">
+                <Datenschutz></Datenschutz>
               </Route>
             </Switch>
           </Router>

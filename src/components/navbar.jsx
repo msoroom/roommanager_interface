@@ -58,6 +58,7 @@ class navbar extends Component {
               </Button>
             </NavDropdown>
           )}
+          <Navbar.Brand href="/datenschutz">Datenschutzerklärung</Navbar.Brand>
         </Nav>
       </Navbar>
     );
