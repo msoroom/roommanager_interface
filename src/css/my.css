@@ -1,0 +1,19 @@
+.box {
+  float: left;
+}
+.autobilder {
+  width: 100%;
+  height: 50%;
+}
+.color-nav {
+  background-color: rgb(236, 109, 7);
+}
+
+.RoomPicBox {
+  width: 60%;
+  height: auto;
+  background-color: rgb(138, 38, 38);
+}
+.PropsList {
+  position: absolute left;
+}
