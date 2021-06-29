@@ -40,7 +40,7 @@ class searchBar extends Component {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      email: this.state.email,
+      name: this.state.name,
       password: this.state.password,
     });
 
