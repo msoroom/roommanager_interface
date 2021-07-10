@@ -135,7 +135,9 @@ class adminPanel extends Component {
     };
 
     fetch("/api/users/update/admin", requestOptions);
-    this.setState({ users: JSON.parse(JSON.stringify(this.state.editusers)) });
+    this.setState({ 
+       users: JSON.parse(JSON.stringify(this.state.editusers)),
+        editing: false });
   }
 }
 
