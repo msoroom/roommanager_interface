@@ -14,11 +14,13 @@ class searchBar extends Component {
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
+            placeholder="Nickname"
             value={this.state.value}
             onChange={(event) => this.setState({ email: event.target.value })}
           />
           <input
             type="password"
+            placeholder="Password"
             value={this.state.password}
             onChange={(event) =>
               this.setState({ password: event.target.value })
@@ -40,7 +42,11 @@ class searchBar extends Component {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
+<<<<<<< HEAD
+      name: this.state.email,
+=======
       name: this.state.name,
+>>>>>>> 7e8124c4e3d50fddeec4a6eadca880b19067929e
       password: this.state.password,
     });
 
